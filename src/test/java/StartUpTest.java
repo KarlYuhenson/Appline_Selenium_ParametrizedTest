@@ -1,6 +1,8 @@
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,6 +11,10 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -33,6 +39,7 @@ public class StartUpTest {
     String passportDateXpath = "//input[@id = 'documentDate']";
     String passportIssuedByXpath = "//input[@id = 'documentIssue']";
     String continueButtonXpath = "//button[@class='btn btn-primary page__btn']";
+
 
 
     @BeforeEach
@@ -68,8 +75,8 @@ public class StartUpTest {
             driver.findElement ( By.xpath ( xPath ) ).click ( );
         }
 
-        public void sendKeyText (String xPath , String text ){
-            driver.findElement ( By.xpath ( xPath ) ).sendKeys ( text );
+        public void sendKeyText (String xPath , String value ){
+            driver.findElement ( By.xpath ( xPath ) ).sendKeys ( value );
         }
 
         public void waitElementToBeClickable (String xPath ){
@@ -82,6 +89,7 @@ public class StartUpTest {
         public void waitPresenceOfElementLocated (String xPath){
             wait.until ( ExpectedConditions.presenceOfElementLocated ( By.xpath ( xPath ) ) );
         }
+
 
         @AfterEach
         public void tearDown () {
