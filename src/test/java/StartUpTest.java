@@ -37,9 +37,7 @@ public class StartUpTest {
 
     @BeforeEach
     public void Start ( ) {
-//        System.setProperty ( "webdriver.chrome.driver" , "driver/chromedriver" );
-//        DesiredCapabilities capabilities= new DesiredCapabilities();
-//        capabilities.setCapability( CapabilityType.PAGE_LOAD_STRATEGY, "eager");
+
         String browser = System.getProperty ( "browser" , "chrome" );
         switch ( browser ) {
             case "chrome": {
@@ -57,12 +55,14 @@ public class StartUpTest {
             }
         }
 
-//            driver = new ChromeDriver ( capabilities );
             driver.manage ( ).window ( ).maximize ( );
             driver.manage ( ).timeouts ( ).pageLoadTimeout ( 20 , SECONDS );
             wait = new WebDriverWait ( driver , 20 );
         }
 
+        public void findElement (String xPath ){
+            driver.findElement ( By.xpath ( xPath ) );
+    }
 
         public void findElementAndClick (String xPath ){
             driver.findElement ( By.xpath ( xPath ) ).click ( );

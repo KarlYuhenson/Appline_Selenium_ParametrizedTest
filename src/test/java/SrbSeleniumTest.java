@@ -1,8 +1,18 @@
+import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class SrbSeleniumTest extends StartUpTest {
+
+
 
 
     @Test
@@ -13,20 +23,27 @@ public class SrbSeleniumTest extends StartUpTest {
         waitElementToBeClickable ( menuLinkXpath );
         //Переход во вкладку "Страхование"
         findElementAndClick ( menuLinkXpath );
-        waitElementToBeClickable ( insuranceTravelLinkXpath );
         //Переход на страницу "Страхование путешественников"
+        waitElementToBeClickable ( insuranceTravelLinkXpath );
         findElementAndClick ( insuranceTravelLinkXpath );
-        waitElementToBeClickable ( takeOutOnlineTravelInsuranceButtonXpath );
+
+//        //Проверка наличия баннера с текстом "Страхование путешественников" (падает)
+//        waitPresenceOfElementLocated ("//h1[text()='Страхование путешественников']");
+//        Assert.assertEquals ( "Содержимое ссылки не соответствует ожиданию", "Страхование путешественников",
+//                driver.findElement ( By.xpath ( "//h1[text()='Страхование путешественников']" ) ).getText () );
+
+
         //Нажатие кнопки "Оформить онлайн"
+        waitElementToBeClickable ( takeOutOnlineTravelInsuranceButtonXpath );
         findElementAndClick ( takeOutOnlineTravelInsuranceButtonXpath );
-        waitElementToBeClickable ( minSummInsuranceXpath );
         //Выбор минимальной суммы страховой защиты
+        waitElementToBeClickable ( minSummInsuranceXpath );
         findElementAndClick ( minSummInsuranceXpath );
-        waitElementToBeClickable ( sendButtonXpath );
         //Нажатие кнопки "Оформить"
+        waitElementToBeClickable ( sendButtonXpath );
         findElementAndClick ( sendButtonXpath );
-        waitVisibilityOfElementLocated (lastNameInsuredLatynXpath);
         //Заполнение поля "Surname" в разделе "Застрахованные"
+        waitVisibilityOfElementLocated (lastNameInsuredLatynXpath);
         findElementAndClick ( lastNameInsuredLatynXpath );
         sendKeyText ( lastNameInsuredLatynXpath, "Ivan" );
         //Заполнение поля "Name" в разделе "Застрахованные"
@@ -59,9 +76,20 @@ public class SrbSeleniumTest extends StartUpTest {
         //Заполнение поля "Кем выдан" в разделе "Паспортные данные"
         findElementAndClick (passportIssuedByXpath);
         sendKeyText (passportIssuedByXpath, "ОВД города Москвы");
+
+//        //Проверка заполнения всех полей
+//        Assert.assertEquals ( "Заполните текстовое поле", "Иванов",
+//                driver.findElement ( By.xpath ( "//input[contains(@data-bind, 'value:LastName')]") ).getAttribute("value"));
+
         //Нажатие кнопки "Продолжить"
         waitPresenceOfElementLocated ( continueButtonXpath );
         findElementAndClick (continueButtonXpath);
+
+        //Проверка ошибки
+        waitPresenceOfElementLocated ( "//div[@class='alert-form alert-form-error']" );
+        Assert.assertEquals ( "Содержимое ссылки не соответствует ожиданию", "При заполнении данных произошла ошибка",
+                driver.findElement ( By.xpath ( "//div[@class='alert-form alert-form-error']" ) ).getText () );
+
 
 
 
