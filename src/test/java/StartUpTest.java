@@ -17,7 +17,6 @@ import java.util.Collection;
 import java.util.List;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-
 public class StartUpTest {
     WebDriver driver;
     WebDriverWait wait;
@@ -39,6 +38,7 @@ public class StartUpTest {
     String passportDateXpath = "//input[@id = 'documentDate']";
     String passportIssuedByXpath = "//input[@id = 'documentIssue']";
     String continueButtonXpath = "//button[@class='btn btn-primary page__btn']";
+
 
 
 
@@ -75,7 +75,7 @@ public class StartUpTest {
             driver.findElement ( By.xpath ( xPath ) ).click ( );
         }
 
-        public void sendKeyText (String xPath , String value ){
+        public void sendKeyText (String xPath , String value ) {
             driver.findElement ( By.xpath ( xPath ) ).sendKeys ( value );
         }
 
@@ -89,6 +89,8 @@ public class StartUpTest {
         public void waitPresenceOfElementLocated (String xPath){
             wait.until ( ExpectedConditions.presenceOfElementLocated ( By.xpath ( xPath ) ) );
         }
+
+
 
 
         @AfterEach
