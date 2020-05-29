@@ -1,8 +1,5 @@
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,10 +8,6 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 public class StartUpTest {
@@ -42,7 +35,7 @@ public class StartUpTest {
 
 
 
-    @BeforeEach
+    @Before
     public void Start ( ) {
 
         String browser = System.getProperty ( "browser" , "chrome" );
@@ -84,7 +77,7 @@ public class StartUpTest {
         }
 
         public void waitVisibilityOfElementLocated (String xPath ){
-            wait.until ( ExpectedConditions.visibilityOfElementLocated ( By.xpath ( xPath ) ) );
+            new WebDriverWait ( driver , 20 ).until ( ExpectedConditions.visibilityOfElementLocated ( By.xpath ( xPath ) ) );
         }
         public void waitPresenceOfElementLocated (String xPath){
             wait.until ( ExpectedConditions.presenceOfElementLocated ( By.xpath ( xPath ) ) );
@@ -93,7 +86,7 @@ public class StartUpTest {
 
 
 
-        @AfterEach
+        @After
         public void tearDown () {
             driver.quit ( );
         }
